@@ -18,6 +18,9 @@ export class UserEntity {
   @Column({ name: 'email' })
   email: string;
 
+  @Column({ name: 'name' })
+  name: string;
+
   @Column({ name: 'password' })
   password: string;
 
@@ -33,8 +36,6 @@ export class UserEntity {
   @Column({ name: 'role_id' })
   roleId: number;
 
-  //   @OneToMany(() => ShortUrlEntity, (shortUrlEntity) => shortUrlEntity.userId)
-  //   shortUrls?: [ShortUrlEntity];
   @ManyToOne(() => Roles)
   @JoinColumn({ name: 'role_id' })
   role: Roles;

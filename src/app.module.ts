@@ -4,7 +4,9 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { join } from 'path';
+import { TaskModule } from './task/task.module';
 import 'dotenv/config';
+import { SeedersModule } from './seeders/seeders.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -20,6 +22,8 @@ import 'dotenv/config';
       schema: process.env.SCHEMA ? process.env.SCHEMA : 'public',
     }),
     AuthModule,
+    TaskModule,
+    SeedersModule,
   ],
   controllers: [AppController],
   providers: [AppService],

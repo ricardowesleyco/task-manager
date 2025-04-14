@@ -5,9 +5,9 @@ export default class RoleEntity {
   @PrimaryGeneratedColumn('increment')
   id: number;
 
-  @Column()
+  @Column({ name: 'name' })
   name: string;
 
-  @Column()
+  @Column({ name: 'key' })
   key: string;
 }

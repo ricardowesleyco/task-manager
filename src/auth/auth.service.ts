@@ -6,7 +6,7 @@ import {
 import { LoginAuthDto } from './dto/login-auth.dto';
 import { UsersService } from './services/user.service';
 import { JwtService } from '@nestjs/jwt';
-import * as bcrypt from 'bcrypt';
+import * as bcrypt from 'bcryptjs';
 import { UserEntity } from './entities/user.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -30,12 +30,12 @@ export class AuthService {
     if (!(await bcrypt.compare(data.password, user.password))) {
       throw new UnauthorizedException('E-mail invalid or password invalid.');
     }
-
     return {
-      Token: await this.jwtService.signAsync({
+      token: await this.jwtService.signAsync({
         user: user.id,
         role: user.role.key,
       }),
+      user: { email: user.email, role: user.role.key, name: user.name },
     };
   }
 }

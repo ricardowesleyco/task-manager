@@ -5,11 +5,11 @@ import {
   TableForeignKey,
 } from 'typeorm';
 
-export class CreateUsersTable1744482560251 implements MigrationInterface {
+export class CreateTasksTable1744651203009 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'users',
+        name: 'tasks',
         columns: [
           {
             name: 'id',
@@ -19,27 +19,19 @@ export class CreateUsersTable1744482560251 implements MigrationInterface {
             generationStrategy: 'increment',
           },
           {
-            name: 'email',
-            type: 'varchar',
-            isUnique: true,
-          },
-          {
-            name: 'name',
-            type: 'varchar',
-            isUnique: true,
-          },
-          {
-            name: 'password',
+            name: 'title',
             type: 'varchar',
           },
-
           {
-            name: 'enabled',
-            type: 'boolean',
-            default: true,
+            name: 'description',
+            type: 'varchar',
           },
           {
-            name: 'role_id',
+            name: 'user_id',
+            type: 'int',
+          },
+          {
+            name: 'status_id',
             type: 'int',
           },
           {
@@ -56,10 +48,15 @@ export class CreateUsersTable1744482560251 implements MigrationInterface {
         ],
       }),
     );
-    await queryRunner.createForeignKeys('users', [
+    await queryRunner.createForeignKeys('tasks', [
       new TableForeignKey({
-        columnNames: ['role_id'],
-        referencedTableName: 'roles',
+        columnNames: ['user_id'],
+        referencedTableName: 'users',
+        referencedColumnNames: ['id'],
+      }),
+      new TableForeignKey({
+        columnNames: ['status_id'],
+        referencedTableName: 'task_status',
         referencedColumnNames: ['id'],
       }),
     ]);

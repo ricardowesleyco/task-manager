@@ -10,8 +10,8 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe({ transform: true }));
 
   const config = new DocumentBuilder()
-    .setTitle('URL Shortener')
-    .setDescription('A Simple URL Shortener')
+    .setTitle('Task Manager')
+    .setDescription('A Simple Task Manager')
     .setVersion('1.0')
     .addBearerAuth({
       type: 'http',
@@ -20,7 +20,7 @@ async function bootstrap() {
     .build();
   const documentFactory = () => SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, documentFactory);
-
-  await app.listen(process.env.PORT ?? 3000);
+  app.enableCors();
+  await app.listen(process.env.PORT ?? 3001);
 }
 bootstrap();
