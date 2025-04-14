@@ -14,10 +14,14 @@ services:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
       - '5432:5432'
+    networks:
+      - app-network
 
   app:
     build: .
     container_name: nest_app
+    networks:
+      - app-network
     depends_on:
       - postgres
     environment:
@@ -26,6 +30,12 @@ services:
       - DB_USERNAME=${DB_USERNAME}
       - DB_URL=${DB_URL}
       - DB_PORT=${DB_PORT}
+      - SCHEMA=${SCHEMA}
+      - PORT=${PORT}
+      - BASE_API_PREFIX=${BASE_API_PREFIX}
+      - BASE_API_URL=${BASE_API_URL}
+      - JWT_KEY=${JWT_KEY}
+      - PUBLIC_KEY=${PUBLIC_KEY}
     ports:
       - '3001:3001'
     # environment:
@@ -35,3 +45,7 @@ services:
     command: yarn start:prod
 volumes:
   postgres_data:
+
+networks:
+  app-network:
+    external: true

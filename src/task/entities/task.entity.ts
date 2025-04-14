@@ -1,4 +1,3 @@
-export class Task {}
 import { UserEntity } from 'src/auth/entities/user.entity';
 import {
   Column,

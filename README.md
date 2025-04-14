@@ -57,9 +57,17 @@ PUBLIC_KEY=UNKNOWN_QUESTION
 
 Certifique-se de que o Docker está instalado corretamente no seu sistema.
 
-### 4. Suba os containers com Docker Compose
+### 4.1 Crie o network no Docker
 
-Execute o comando abaixo para iniciar os containers do frontend, backend e banco de dados:
+Execute o comando abaixo para criar o network entre frontend e backend no docker:
+
+```bash
+docker network create app-network
+```
+
+### 4.2 Suba os containers com Docker Compose
+
+Execute o comando abaixo para iniciar o container :
 
 ```bash
 docker-compose up --build
@@ -95,7 +103,7 @@ password: user
 
 ---
 
-### Para uma melhor experência utilize junto com o frontend.
+### Para o uso completo da aplicação, utilize junto com o frontend.
 
 - https://github.com/ricardowesleyco/task-manager-frontend
 

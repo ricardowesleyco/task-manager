@@ -63,15 +63,15 @@ export class CreateTasksTable1744651203009 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    const table = await queryRunner.getTable('users');
+    const table = await queryRunner.getTable('tasks');
     const foreignKeys = table.foreignKeys;
 
     await Promise.all(
       foreignKeys.map(async (fk) => {
-        await queryRunner.dropForeignKey('users', fk);
+        await queryRunner.dropForeignKey('tasks', fk);
       }),
     );
 
-    await queryRunner.dropTable('users');
+    await queryRunner.dropTable('tasks');
   }
 }
